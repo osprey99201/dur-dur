@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fbc8d4, #cce7ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Georgia", serif;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 20px;
+  }
+
+  .heart {
+    position: absolute;
+    top: -10vh;
+    opacity: 0.25;
+    animation: fall linear infinite;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes fall {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+  }
+
+  .paper-wrapper {
+    width: 100%;
+    max-width: 720px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .paper {
+    background: #fffdf9;
+    padding: clamp(24px, 6vw, 60px);
+    border-radius: 8px;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+    font-size: clamp(1.05rem, 3.5vw, 1.4rem);
+    line-height: 1.85;
+    color: #333;
+    text-align: center;
+    position: relative;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+  }
+
+  .tear {
+    transform: translateY(130%);
+    opacity: 0;
+  }
+
+  .paper::after {
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    width: 100%;
+    height: 18px;
+    background: repeating-linear-gradient(
+      -45deg,
+      #fffdf9,
+      #fffdf9 10px,
+      #f0f0f0 10px,
+      #f0f0f0 20px
+    );
+  }
+
+  .hint {
+    margin-top: 18px;
+    font-size: 0.85rem;
+    color: #999;
+  }
+
+  #jarContainer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+  }
+
+  #jar {
+    width: 180px;
+    height: 220px;
+    background: linear-gradient(to top, #f5d6b3, #f4e1d2);
+    border-radius: 0 0 30px 30px;
+    position: relative;
+    margin: 0 auto;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    border: 2px solid #d4a373;
+  }
+
+  #jarCap {
+    width: 200px;
+    height: 24px;
+    background: #d4a373;
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    top: -24px;
+    left: -10px;
+    transition: transform 0.5s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  #jarLabel {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #a0522d;
+    pointer-events: none;
+  }
+
+  #jarNote {
+    display: none;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 12px;
+    max-width: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    word-wrap: break-word;
+    font-size: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  const colors = ["#ff6b81", "#ff9ff3", "#feca57", "#54a0ff", "#5f27cd"];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = 12 + Math.random() * 20 + "px";
+    h.style.color = colors[Math.floor(Math.random() * colors.length)];
+    h.style.animationDuration = 8 + Math.random() * 10 + "s";
+    h.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(h);
+  }
+</script>
+
+<div class="paper-wrapper">
+  <div class="paper" id="paper">
+    Hey.<br><br>
+    This isn’t just a website like usual. It’s a little piece of something
+    we’ve been building for two years.
+    <div class="hint">tap anywhere</div>
+  </div>
+</div>
+
+<div id="jarContainer">
+  <div id="jar">
+    <div id="jarCap"></div>
+    <div id="jarLabel">open when you feel low</div>
+  </div>
+  <div id="jarNote"></div>
+</div>
+
+<script>
+  const pages = [
+    `Hey.<br><br>
+     This isn’t just a website. It’s a little piece of something
+     we’ve been building for two years.`,
+
+    `Some days were pretty like you some days were ugly like me.
+     But every day, choosing you felt right.`,
+
+    `You became my comfort, my laughter,
+     and the person I want to tell everything to.`,
+
+    `If I could relive it all, I wouldn’t change a thing —
+     especially not you :) .`,
+
+    `Happy 2 years kafosa❤️<br><br>
+     I still choose you will always do ;).`
+  ];
+
+  const jarTexts = [
+    "I Love youuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+    "Ykw lar kal lain ge pick the phone i am here",
+    "yes things not good hojaye ga easy i got you don't be low ",
+    "yes i am mad but not enough mad that i wont pick up our call????",
+    "i am tired...hope this one never comes to your jar but idk i am weak asf but sure i just want you to be happy idk how to feel sane anymore.. do what makes you happy",
+    "bhai bhai bhai kaha ugly bhai tum porsche bhi tumhare samney rikshaw lagti ha bhai ",
+    "no one cares? i do? call karlo!!!!!!!!!!!!!!!!!!!!!!!",
+    "no one??? bhaaiii!!! i am i do want you i wanna hear u yap",
+     "aww come here come here i got you tired? long day? i got you its gonna be just fine",
+    "khair ho gayi bolnay do usse aese hazar log ayen ge hazar jayenge ",
+     "i mean...chorna chor do me kya bolun..",
+    "achaaaaaaaaa you got pissed at me fair enough choro yeh wala saad neutral ha maybe call home you'll feel better",
+     "bhook lagi ha? order something or call me lemme order something for you",
+    "tum kya cheez ho why u had to do that chalo jo hona tha ho giya abh u can enjoy sirf shugal lagao",
+    
+    "Thank you for being my home 💗",
+  ];
+
+  let index = 0;
+  const paper = document.getElementById("paper");
+  const paperWrapper = document.querySelector(".paper-wrapper");
+  const jarContainer = document.getElementById("jarContainer");
+  const jar = document.getElementById("jar");
+  const jarCap = document.getElementById("jarCap");
+  const jarNote = document.getElementById("jarNote");
+
+  // pick a random note once at page load
+  const randomNote = jarTexts[Math.floor(Math.random() * jarTexts.length)];
+
+  let jarOpened = false;
+
+  document.body.addEventListener("click", () => {
+    if (index < pages.length - 1) {
+      paper.classList.add("tear");
+      setTimeout(() => {
+        index++;
+        paper.innerHTML = pages[index] + `<div class="hint">tap anywhere</div>`;
+        paper.classList.remove("tear");
+      }, 800);
+    } else if (index === pages.length - 1) {
+      paperWrapper.style.display = "none";
+      jarContainer.style.display = "block";
+      triggerExtraHearts();
+    }
+  });
+
+  jar.addEventListener("click", () => {
+    if (!jarOpened) {
+      jarOpened = true;
+      jarCap.style.transform = "rotate(-45deg)";
+      jarNote.innerHTML = randomNote;
+      jarNote.style.display = "block";
+    }
+  });
+
+  function triggerExtraHearts() {
+    for (let i = 0; i < 40; i++) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerHTML = "❤";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.fontSize = 14 + Math.random() * 20 + "px";
+      h.style.color = colors[Math.floor(Math.random() * colors.length)];
+      h.style.animationDuration = 6 + Math.random() * 8 + "s";
+      h.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(h);
+    }
+  }
+</script>
+
+</body>
+</html>
